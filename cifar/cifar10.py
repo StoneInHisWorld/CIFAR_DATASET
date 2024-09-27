@@ -32,7 +32,8 @@ class CIFAR10:
             ])
         }
         self.__test_batch = {
-            'features': test_batch[b'data'], 'labels': test_batch[b'labels']
+            'features': convert_to_RGB(test_batch[b'data']),
+            'labels': np.array(test_batch[b'labels'])
         }
         self.__labels = label_names[b'label_names']
 
@@ -45,5 +46,22 @@ class CIFAR10:
         return self.__test_batch
 
     @property
+    def len_of_train_ds(self):
+        return len(self.__train_batch['labels'])
+
+    @property
+    def len_of_test_ds(self):
+        return len(self.__test_batch['labels'])
+
+    @property
     def labels(self):
         return self.__labels
+
+    @property
+    def img_shape(self):
+        return self.__train_batch['features'].shape[-3:-1]
+
+    @property
+    def img_channel(self):
+        return self.__train_batch['features'].shape[-1]
+

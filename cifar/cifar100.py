@@ -53,3 +53,19 @@ class CIFAR100:
     @property
     def labels(self):
         return self.__labels
+
+    @property
+    def len_of_train_ds(self):
+        return len(self.__train_batch['labels'])
+
+    @property
+    def len_of_test_ds(self):
+        return len(self.__test_batch['labels'])
+
+    @property
+    def img_shape(self):
+        return self.__train_batch['features'].shape[-3:-1]
+
+    @property
+    def img_channel(self):
+        return self.__train_batch['features'].shape[-1]
